@@ -1,0 +1,11 @@
+"use strict";
+exports.__esModule = true;
+var crypto_1 = require("crypto");
+var resizeIv = Buffer.allocUnsafe(16);
+var key = Buffer.alloc(32);
+var ci = (0, crypto_1.createCipheriv)("aes256", key, resizeIv);
+ci.update("rongrong");
+key[0] = 2;
+var de = (0, crypto_1.createDecipheriv)("aes256", key, resizeIv);
+de.update(ci.final());
+console.log(de.final().toString());
